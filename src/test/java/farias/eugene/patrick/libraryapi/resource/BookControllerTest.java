@@ -43,20 +43,21 @@ class BookControllerTest {
     @DisplayName("Deve Criar um livro com sucesso")
     public void createBookTest() throws  Exception{
 
-//        BookDTO dto = BookDTO.builder()
-//                .author("Patrick")
-//                .title("As Aventuras")
-//                .isbn("1234")
-//                .build();
-//
-//        Book SaveBook = Book.builder().id(10l).author("Patrick")
-//                .title("As Aventuras")
-//                .isbn("1234").build();
-//
-//        // serve para
-//        BDDMockito.given(service.save(Mockito.any(Book.class))).willReturn(SaveBook);
+        BookDTO dto = BookDTO.builder()
+                .author("Patrick")
+                .title("As Aventuras")
+                .isbn("1234")
+                .build();
 
-        String json = new ObjectMapper().writeValueAsString(null);
+        Book SaveBook = Book.builder().id(10l).author("Patrick")
+                .title("As Aventuras")
+                .isbn("1234").build();
+
+
+        // Simula o comportamento do service, forcando o retorno esperado.
+        BDDMockito.given(service.save(Mockito.any(Book.class))).willReturn(SaveBook);
+
+        String json = new ObjectMapper().writeValueAsString(dto);
 
         MockHttpServletRequestBuilder request =  MockMvcRequestBuilders
                 .post(BOOK_API)
@@ -68,10 +69,10 @@ class BookControllerTest {
                 .perform(request)
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").isNotEmpty())
-                .andExpect(jsonPath("id").value(10l));
-//                .andExpect(jsonPath("title").value(dto.getTitle()))
-//                .andExpect(jsonPath("author").value(dto.getAuthor()))
-//                .andExpect(jsonPath("isbn").value(dto.getIsbn()));
+                .andExpect(jsonPath("id").value(10l))
+                .andExpect(jsonPath("title").value(dto.getTitle()))
+                .andExpect(jsonPath("author").value(dto.getAuthor()))
+                .andExpect(jsonPath("isbn").value(dto.getIsbn()));
     }
 
     @Test
