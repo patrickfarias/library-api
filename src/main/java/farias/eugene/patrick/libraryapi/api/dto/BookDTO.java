@@ -12,13 +12,13 @@ public class BookDTO {
 
     private Long id;
 
-   // @NotEmpty
+    @NotEmpty
     private String title;
 
-    //@NotEmpty
+    @NotEmpty
     private String author;
 
-    //@NotEmpty
+    @NotEmpty
     private String isbn;
 
 }
