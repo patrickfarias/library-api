@@ -1,25 +1,28 @@
-package farias.eugene.patrick.libraryapi.resource;
+package farias.eugene.patrick.libraryapi.api.resource;
 
-import farias.eugene.patrick.libraryapi.dto.BookDTO;
-import farias.eugene.patrick.libraryapi.model.entity.Book;
+import farias.eugene.patrick.libraryapi.api.dto.BookDTO;
+import farias.eugene.patrick.libraryapi.model.entyty.Book;
 import farias.eugene.patrick.libraryapi.service.BookService;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/books")
-//@RequiredArgsConstructor
 public class BookController {
 
-    private final BookService service;
+    @Autowired
+    private BookService service;
+
+    @Autowired
     private ModelMapper modelMapper;
 
-    public BookController(BookService service, ModelMapper modelMapper) {
-        this.service = service;
-        this.modelMapper = modelMapper;
-    }
+//    public BookController(BookService service, ModelMapper modelMapper) {
+//        this.service = service;
+//        this.modelMapper = modelMapper;
+//    }
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
